@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { PdfUpload } from './pdf-upload';
 
-describe('App', () => {
+describe('PdfUpload', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [PdfUpload],
     }).compileComponents();
   });
 });

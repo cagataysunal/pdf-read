@@ -1,0 +1,8 @@
+<button type="button" (click)="fileInput.click()">Upload PDF</button>
+<input
+  #fileInput
+  type="file"
+  accept="application/pdf"
+  style="display: none"
+  (change)="onFileSelected($event)"
+/>

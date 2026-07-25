@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { PdfUpload } from './pdf-upload';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  imports: [PdfUpload],
 })
 export class App {
   protected readonly title = signal('pdf-read');
