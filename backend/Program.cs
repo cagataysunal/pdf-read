@@ -9,8 +9,21 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartBodyLengthLimit = 50 * 1024 * 1024;
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyMethod();
+    }
+    );
+});
+
 
 var app = builder.Build();
+
+app.UseCors("AllowAngularApp");
 
 if (app.Environment.IsDevelopment())
 {
@@ -35,6 +48,10 @@ app.MapPost("/api/upload-pdf", async (IFormFile file) =>
     }
 
     using MemoryStream memoryStream = new();
+
+    await file.CopyToAsync(memoryStream);
+    memoryStream.Position = 0;
+
     string result = PdfReader.ReadPdfFromStream(memoryStream);
     return Results.Ok(new { Message = result });
 }).DisableAntiforgery();
